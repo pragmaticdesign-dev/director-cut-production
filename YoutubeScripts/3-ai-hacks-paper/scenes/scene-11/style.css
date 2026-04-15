@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  width: 1080px;
+  height: 1920px;
+  background-color: #f5f0e8;
+  font-family: 'Quicksand', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 45px;
+  z-index: 1;
+}
+
+.calendar {
+  background: #fff;
+  border: 6px solid #3b3b3b;
+  border-radius: 20px;
+  width: 750px;
+  box-shadow: 8px 8px 0 #3b3b3b;
+  overflow: hidden;
+  animation: slideUp 0.7s ease 0.3s both;
+}
+
+.cal-header { background: #e53935; border-bottom: 5px solid #3b3b3b; padding: 25px 0; text-align: center; font-size: 42px; font-weight: 700; color: #fff; }
+.cal-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); border-bottom: 3px solid #3b3b3b; background: #fce4ec; }
+.cal-days { display: grid; grid-template-columns: repeat(7, 1fr); padding: 15px; gap: 8px; }
+.cal-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: 12px; font-size: 28px; font-weight: 600; position: relative; }
+.cal-day.checked { background: #e1f5e0; border: 3px solid #3b3b3b; }
+.checkmark { position: absolute; font-size: 32px; top: -2px; right: 0; animation: checkPop 0.3s ease both; }
+
+@keyframes checkPop { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: scale(1); } }
