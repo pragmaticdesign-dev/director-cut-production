@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080, height=1920">
+  <title>Scene 04 - Act as Senior Dev</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="speech-bubble">
+      <span class="bubble-quote">"Act as a senior dev"</span>
+    </div>
+
+    <div style="height: 30px;"></div>
+
+    <div class="transform-section">
+      <div class="code-block messy">
+        <div class="code-label">❌ BEFORE</div>
+        <div class="code-line">var x = getData()</div>
+        <div class="code-line">if(x != null){</div>
+        <div class="code-line">&nbsp;&nbsp;doStuff(x)</div>
+        <div class="code-line">&nbsp;&nbsp;doMore(x)</div>
+        <div class="code-line">} // TODO fix</div>
+        <div class="code-line">console.log(x)</div>
+      </div>
+
+      <svg class="arrow-svg" viewBox="0 0 80 80">
+        <path d="M 10 40 L 55 40" />
+        <path d="M 45 25 L 60 40 L 45 55" />
+      </svg>
+
+      <div class="code-block clean">
+        <div class="code-label">✅ AFTER</div>
+        <div class="code-line">const data = await</div>
+        <div class="code-line">&nbsp;&nbsp;fetchData();</div>
+        <div class="code-line">if (!data) return;</div>
+        <div class="code-line">processData(data);</div>
+        <div class="code-line">enrichData(data);</div>
+        <div class="code-line">logger.info(data);</div>
+      </div>
+    </div>
+
+    <div class="result-pill">✨ One prompt. Clean code.</div>
+  </div>
+</body>
+</html>

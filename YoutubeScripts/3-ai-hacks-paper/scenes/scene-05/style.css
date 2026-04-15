@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  width: 1080px;
+  height: 1920px;
+  background-color: #fff9c4;
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  font-family: 'Quicksand', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.flash-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.5) 0%, transparent 70%);
+  animation: flashPulse 1.5s ease infinite;
+}
+
+@keyframes flashPulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.lightning-container {
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.lightning-svg {
+  width: 500px;
+  height: 700px;
+  filter: drop-shadow(0 0 30px rgba(255, 193, 7, 0.6));
+}
+
+.lightning-bolt {
+  fill: none;
+  stroke: #3b3b3b;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: drawBolt 0.6s ease 0.2s forwards;
+}
+
+.lightning-fill {
+  fill: #ffc107;
+  stroke: #3b3b3b;
+  stroke-width: 6;
+  opacity: 0;
+  animation: flashIn 0.15s ease 0.7s forwards;
+}
+
+@keyframes drawBolt {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes flashIn {
+  0% { opacity: 0; transform: scale(1.3); }
+  50% { opacity: 1; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.spark {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #ffc107;
+  border: 3px solid #3b3b3b;
+  border-radius: 50%;
+  animation: sparkBurst 0.8s ease forwards;
+  opacity: 0;
+}
+
+.spark:nth-child(1) { top: 30%; left: 20%; animation-delay: 0.8s; }
+.spark:nth-child(2) { top: 20%; right: 25%; animation-delay: 0.9s; }
+.spark:nth-child(3) { bottom: 30%; left: 15%; animation-delay: 1.0s; }
+.spark:nth-child(4) { bottom: 25%; right: 20%; animation-delay: 1.1s; }
+.spark:nth-child(5) { top: 50%; left: 10%; animation-delay: 1.2s; width: 14px; height: 14px; }
+.spark:nth-child(6) { top: 40%; right: 12%; animation-delay: 1.3s; width: 16px; height: 16px; }
+
+@keyframes sparkBurst {
+  0% { opacity: 0; transform: scale(0) translate(0, 0); }
+  50% { opacity: 1; transform: scale(1.5) translate(var(--tx, 20px), var(--ty, -20px)); }
+  100% { opacity: 0; transform: scale(0.5) translate(var(--tx2, 40px), var(--ty2, -40px)); }
+}
+
+.spark:nth-child(1) { --tx: -40px; --ty: -30px; --tx2: -60px; --ty2: -50px; }
+.spark:nth-child(2) { --tx: 40px; --ty: -30px; --tx2: 60px; --ty2: -50px; }
+.spark:nth-child(3) { --tx: -30px; --ty: 40px; --tx2: -50px; --ty2: 60px; }
+.spark:nth-child(4) { --tx: 30px; --ty: 40px; --tx2: 50px; --ty2: 60px; }
+.spark:nth-child(5) { --tx: -50px; --ty: 10px; --tx2: -70px; --ty2: 15px; }
+.spark:nth-child(6) { --tx: 50px; --ty: -10px; --tx2: 70px; --ty2: -15px; }
+
+.zigzag-lines {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.zigzag-lines svg {
+  width: 100%;
+  height: 100%;
+}
+
+.zig-line {
+  fill: none;
+  stroke: rgba(59,59,59,0.1);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
