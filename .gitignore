@@ -1,0 +1,14 @@
+# Media files
+*.mp3
+*.png
+*.mp4
+*.m4a
+
+# Python
+__pycache__/
+*.pyc
+
+# Project specific
+.upload/
+background/
+/director-cut/
