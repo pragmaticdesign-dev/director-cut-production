@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, height=1920">
+<title>Scene 02 - LLM in CPU Socket</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    width:1080px;height:1920px;overflow:hidden;
+    background:#f5f0e8;
+    font-family:'Quicksand',sans-serif;
+    position:relative;
+  }
+  body::before{
+    content:'';position:absolute;inset:0;
+    background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.015) 3px,rgba(0,0,0,.015) 4px),
+               repeating-linear-gradient(90deg,transparent,transparent 3px,rgba(0,0,0,.01) 3px,rgba(0,0,0,.01) 4px);
+    pointer-events:none;z-index:1;
+  }
+  body::after{
+    content:'';position:absolute;inset:0;
+    background:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(180,170,155,.15) 59px,rgba(180,170,155,.15) 60px),
+               repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(180,170,155,.15) 59px,rgba(180,170,155,.15) 60px);
+    pointer-events:none;z-index:0;
+  }
+  .container{
+    width:100%;height:100%;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;position:relative;z-index:2;
+    gap:60px;
+  }
+  .title{
+    font-family:'Inter',sans-serif;font-weight:800;font-size:56px;
+    color:#3b3b3b;text-align:center;letter-spacing:2px;
+    animation:slideDown .7s ease-out;
+  }
+  .title span{color:#1565c0;}
+
+  /* CPU Socket */
+  .cpu-socket{
+    width:620px;height:620px;position:relative;
+    animation:bounceIn 1s .2s both;
+  }
+  /* Outer socket frame */
+  .socket-frame{
+    width:100%;height:100%;
+    border:6px solid #3b3b3b;border-radius:24px;
+    background:#e3f2fd;
+    box-shadow:6px 6px 0 #3b3b3b;
+    position:relative;
+    display:flex;align-items:center;justify-content:center;
+  }
+  /* Pin rows */
+  .pins{position:absolute;display:flex;gap:18px;}
+  .pins.top{top:-20px;left:50%;transform:translateX(-50%);flex-direction:row;}
+  .pins.bottom{bottom:-20px;left:50%;transform:translateX(-50%);flex-direction:row;}
+  .pins.left{left:-20px;top:50%;transform:translateY(-50%);flex-direction:column;}
+  .pins.right{right:-20px;top:50%;transform:translateY(-50%);flex-direction:column;}
+  .pin{
+    width:10px;height:22px;background:#3b3b3b;border-radius:2px;
+  }
+  .pins.left .pin,.pins.right .pin{width:22px;height:10px;}
+
+  /* LLM Chip inside */
+  .llm-chip{
+    width:380px;height:380px;
+    border:5px solid #3b3b3b;border-radius:18px;
+    background:linear-gradient(135deg,#fff,#e8e0d4);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    box-shadow:inset 0 0 30px rgba(0,0,0,.05);
+    position:relative;
+  }
+  .llm-chip::after{
+    content:'';position:absolute;top:16px;left:16px;
+    width:40px;height:40px;border-radius:50%;
+    background:#ffd54f;border:3px solid #3b3b3b;
+  }
+  .llm-icon{font-size:100px;margin-bottom:10px;}
+  .llm-text{
+    font-family:'Inter',sans-serif;font-weight:900;
+    font-size:72px;color:#3b3b3b;letter-spacing:4px;
+  }
+  .llm-sub{
+    font-family:'Quicksand',sans-serif;font-weight:600;
+    font-size:26px;color:#777;margin-top:6px;
+  }
+
+  /* Context = RAM pill */
+  .pill-tag{
+    display:flex;align-items:center;gap:16px;
+    background:#ffe8d6;border:5px solid #3b3b3b;
+    border-radius:60px;padding:22px 52px;
+    box-shadow:4px 4px 0 #3b3b3b;
+    animation:slideUp .8s .5s both;
+  }
+  .pill-tag .icon{font-size:48px;}
+  .pill-tag .text{
+    font-family:'Inter',sans-serif;font-weight:700;
+    font-size:48px;color:#3b3b3b;
+  }
+  .pill-tag .eq{
+    font-family:'Inter',sans-serif;font-weight:800;
+    font-size:52px;color:#e65100;
+  }
+
+  /* Decorative circuit traces */
+  .trace{position:absolute;background:#3b3b3b;opacity:.1;border-radius:2px;}
+  .trace-1{width:3px;height:120px;top:160px;left:120px;animation:fadeIn 1s .8s both;}
+  .trace-2{width:120px;height:3px;bottom:300px;right:80px;animation:fadeIn 1s 1s both;}
+  .trace-3{width:3px;height:80px;bottom:200px;left:200px;animation:fadeIn 1s 1.2s both;}
+
+  .corner{position:absolute;width:80px;height:80px;opacity:.25;}
+  .corner-tl{top:40px;left:40px;border-top:5px solid #3b3b3b;border-left:5px solid #3b3b3b;border-radius:8px 0 0 0;}
+  .corner-tr{top:40px;right:40px;border-top:5px solid #3b3b3b;border-right:5px solid #3b3b3b;border-radius:0 8px 0 0;}
+  .corner-bl{bottom:40px;left:40px;border-bottom:5px solid #3b3b3b;border-left:5px solid #3b3b3b;border-radius:0 0 0 8px;}
+  .corner-br{bottom:40px;right:40px;border-bottom:5px solid #3b3b3b;border-right:5px solid #3b3b3b;border-radius:0 0 8px 0;}
+
+  @keyframes bounceIn{
+    0%{transform:scale(0) rotate(-5deg);opacity:0;}
+    50%{transform:scale(1.05) rotate(1deg);}
+    100%{transform:scale(1) rotate(0);opacity:1;}
+  }
+  @keyframes slideDown{
+    0%{transform:translateY(-50px);opacity:0;}
+    100%{transform:translateY(0);opacity:1;}
+  }
+  @keyframes slideUp{
+    0%{transform:translateY(40px);opacity:0;}
+    100%{transform:translateY(0);opacity:1;}
+  }
+  @keyframes fadeIn{
+    0%{opacity:0;}100%{opacity:.1;}
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">🧠 <span>LLM</span> Inside the Socket</div>
+
+    <div class="cpu-socket">
+      <div class="socket-frame">
+        <div class="pins top">
+          <div class="pin"></div><div class="pin"></div><div class="pin"></div>
+          <div class="pin"></div><div class="pin"></div><div class="pin"></div>
+          <div class="pin"></div><div class="pin"></div><div class="pin"></div>
+          <div class="pin"></div><div class="pin"></div><div class="pin"></div>
+        </div>
+        <div class="pins bottom">
+          <div class="pin"></div><div class="pin"></div><div class="pin"></div>
+          <div class="pin"></div><div class="pin"></div><div class="pin"></div>
+          <div class="pin"></div><div class="pin"></div><div class="pin"></div>
+          <div class="pin"></div><div class="pin"></div><div class="pin"></div>
+        </div>
+        <div class="pins left">
+          <div class="pin"></div><div class="pin"></div><div class="pin"></div>
+          <div class="pin"></div><div class="pin"></div><div class="pin"></div>
+          <div class="pin"></div><div class="pin"></div><div class="pin"></div>
+          <div class="pin"></div><div class="pin"></div><div class="pin"></div>
+        </div>
+        <div class="pins right">
+          <div class="pin"></div><div class="pin"></div><div class="pin"></div>
+          <div class="pin"></div><div class="pin"></div><div class="pin"></div>
+          <div class="pin"></div><div class="pin"></div><div class="pin"></div>
+          <div class="pin"></div><div class="pin"></div><div class="pin"></div>
+        </div>
+        <div class="llm-chip">
+          <div class="llm-icon">🤖</div>
+          <div class="llm-text">LLM</div>
+          <div class="llm-sub">Large Language Model</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pill-tag">
+      <span class="icon">💾</span>
+      <span class="text">CONTEXT</span>
+      <span class="eq">=</span>
+      <span class="text">RAM</span>
+    </div>
+  </div>
+
+  <div class="trace trace-1"></div>
+  <div class="trace trace-2"></div>
+  <div class="trace trace-3"></div>
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+</body>
+</html>
