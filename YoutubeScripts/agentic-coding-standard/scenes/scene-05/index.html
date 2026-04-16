@@ -4,18 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=1080, height=1920">
 <title>Scene 05 - HUMAN DESIGN</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
+  @keyframes unroll { 0% { max-height: 0; opacity: 0; } 100% { max-height: 1200px; opacity: 1; } }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { width: 1080px; height: 1920px; background: #f5f0e8; font-family: sans-serif; overflow: hidden; }
-  .container { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-  .blueprint { width: 900px; background: #fff; border: 5px solid #3b3b3b; border-radius: 20px; padding: 50px; }
-  .title { font-size: 100px; font-weight: 900; }
+  body { width: 1080px; height: 1920px; background: #f5f0e8; font-family: 'Quicksand', sans-serif; overflow: hidden; }
+  .container { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px; }
+  .blueprint { width: 900px; background: #fff; border: 5px solid #3b3b3b; border-radius: 20px; padding: 50px; box-shadow: 8px 8px 0 rgba(0,0,0,0.1); animation: unroll 1.2s ease-out both; }
+  .title { font-size: 100px; font-weight: 900; color: #3b3b3b; text-align: center; margin-bottom: 40px; }
 </style>
 </head>
 <body>
   <div class="container">
-    <div class="title">HUMAN DESIGN</div>
-    <div class="blueprint">📜 Blueprint Ready</div>
+    <div class="title">HUMAN<br>DESIGN</div>
+    <div class="blueprint">📜 Designing the future...</div>
   </div>
 </body>
 </html>
