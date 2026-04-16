@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, height=1920">
+<title>Scene 01 - 10x DEV IS DEAD</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  @keyframes bounceIn { 0% { transform: scale(0.3); opacity: 0; } 50% { transform: scale(1.08); opacity: 1; } 70% { transform: scale(0.95); } 100% { transform: scale(1); opacity: 1; } }
+  @keyframes slideUp { 0% { transform: translateY(80px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+  @keyframes drawCross { 0% { stroke-dashoffset: 400; } 100% { stroke-dashoffset: 0; } }
+  @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+  @keyframes wiggle { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
+  @keyframes floatUp { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1920px; background: #f5f0e8; font-family: 'Quicksand', 'Inter', sans-serif; overflow: hidden; position: relative; background-image: repeating-linear-gradient(0deg, transparent, transparent 39px, #d4cfc4 39px, #d4cfc4 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, #e8e3d9 39px, #e8e3d9 40px); }
+  body::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.06) 100%); pointer-events: none; z-index: 100; }
+  .page-border { position: absolute; top: 30px; left: 30px; right: 30px; bottom: 30px; border: 6px solid #3b3b3b; border-radius: 18px; pointer-events: none; z-index: 50; }
+  .container { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 60px; position: relative; }
+  .top-tag { position: absolute; top: 80px; background: #ffe8d6; border: 4px solid #3b3b3b; border-radius: 12px; padding: 14px 40px; font-weight: 700; font-size: 32px; color: #3b3b3b; animation: bounceIn 0.6s ease-out both 0.2s; transform: rotate(-1deg); }
+  .main-title { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 120px; color: #3b3b3b; text-align: center; line-height: 1.1; margin-bottom: 60px; animation: bounceIn 0.7s ease-out both 0.4s; text-shadow: 4px 4px 0 rgba(0,0,0,0.08); }
+  .main-title span.red { color: #e74c3c; }
+  .code-block { position: relative; background: #fff; border: 5px solid #3b3b3b; border-radius: 16px; padding: 50px 80px; margin: 30px 0; animation: slideUp 0.6s ease-out both 0.7s; box-shadow: 8px 8px 0 rgba(0,0,0,0.1); }
+  .code-text { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 140px; color: #3b3b3b; letter-spacing: 12px; position: relative; }
+  .cross-svg { position: absolute; top: -20px; left: -20px; width: calc(100% + 40px); height: calc(100% + 40px); z-index: 10; }
+  .cross-line { stroke: #e74c3c; stroke-width: 14; stroke-linecap: round; fill: none; stroke-dasharray: 400; animation: drawCross 0.8s ease-out both; }
+  .cross-line:nth-child(1) { animation-delay: 1.2s; }
+  .cross-line:nth-child(2) { animation-delay: 1.5s; }
+  .architect-block { background: #e1f5e0; border: 5px solid #3b3b3b; border-radius: 16px; padding: 40px 60px; margin-top: 40px; display: flex; align-items: center; gap: 24px; animation: bounceIn 0.7s ease-out both 1.8s; box-shadow: 8px 8px 0 rgba(0,0,0,0.1); animation-name: bounceIn, wiggle; animation-duration: 0.7s, 2s; animation-delay: 1.8s, 2.8s; animation-iteration-count: 1, infinite; animation-fill-mode: both, none; }
+  .crown { font-size: 90px; animation: floatUp 2s ease-in-out infinite 2.5s; }
+  .architect-text { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 80px; color: #2d7a2d; letter-spacing: 4px; }
+  .subtitle { margin-top: 60px; font-weight: 600; font-size: 38px; color: #666; text-align: center; animation: slideUp 0.6s ease-out both 2.2s; line-height: 1.5; }
+</style>
+</head>
+<body>
+  <div class="page-border"></div>
+  <div class="container">
+    <div class="top-tag">⚡ THE TRUTH IN 2026</div>
+    <div class="main-title"><span class="red">10x</span> DEV<br>IS <span class="red">DEAD</span></div>
+    <div class="code-block">
+      <span class="code-text">CODE</span>
+      <svg class="cross-svg" viewBox="0 0 400 200"><line class="cross-line" x1="20" y1="20" x2="380" y2="180"/><line class="cross-line" x1="380" y1="20" x2="20" y2="180"/></svg>
+    </div>
+    <div class="architect-block"><span class="crown">👑</span><span class="architect-text">ARCHITECT</span></div>
+    <p class="subtitle">The future belongs to<br><strong>system thinkers</strong>, not typists.</p>
+  </div>
+</body>
+</html>

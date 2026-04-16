@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, height=1920">
+<title>Scene 02 - Typewriter vs Robot</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  @keyframes bounceIn { 0% { transform: scale(0.3); opacity: 0; } 50% { transform: scale(1.08); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+  @keyframes slideLeft { 0% { transform: translateX(100px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
+  @keyframes slideRight { 0% { transform: translateX(-100px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
+  @keyframes fadeOut { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0.2; transform: scale(0.9); filter: grayscale(1); } }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1920px; background: #f5f0e8; font-family: 'Quicksand', 'Inter', sans-serif; overflow: hidden; position: relative; background-image: repeating-linear-gradient(0deg, transparent, transparent 39px, #d4cfc4 39px, #d4cfc4 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, #e8e3d9 39px, #e8e3d9 40px); }
+  .page-border { position: absolute; top: 30px; left: 30px; right: 30px; bottom: 30px; border: 6px solid #3b3b3b; border-radius: 18px; pointer-events: none; z-index: 50; }
+  .container { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 60px; position: relative; }
+  .typewriter-card { background: #fff; border: 5px solid #3b3b3b; border-radius: 20px; padding: 50px; width: 820px; text-align: center; box-shadow: 8px 8px 0 rgba(0,0,0,0.1); animation: slideRight 0.7s ease-out both 0.5s, fadeOut 1s ease-out both 2.5s; }
+  .vs-badge { background: #ffe8d6; border: 5px solid #3b3b3b; border-radius: 50%; width: 120px; height: 120px; display: flex; align-items: center; justify-content: center; font-family: 'Inter', sans-serif; font-weight: 900; font-size: 48px; color: #e74c3c; animation: bounceIn 0.6s ease-out both 1.2s; }
+  .robot-card { background: #e1f5e0; border: 5px solid #3b3b3b; border-radius: 20px; padding: 50px; width: 820px; text-align: center; box-shadow: 8px 8px 0 rgba(0,0,0,0.1); animation: slideLeft 0.7s ease-out both 1.5s; }
+  .robot-face { width: 220px; height: 220px; margin: 0 auto 30px; background: #fff; border: 6px solid #3b3b3b; border-radius: 30px; position: relative; animation: float 3s ease-in-out infinite 2s; }
+  .robot-eye { width: 40px; height: 50px; background: #4caf50; border: 4px solid #3b3b3b; border-radius: 10px; position: absolute; top: 55px; animation: blink 2s ease-in-out infinite; }
+  .robot-eye.left { left: 45px; } .robot-eye.right { right: 45px; }
+  .robot-mouth { width: 80px; height: 30px; border: 4px solid #3b3b3b; border-radius: 0 0 40px 40px; border-top: none; position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); }
+</style>
+</head>
+<body>
+  <div class="page-border"></div>
+  <div class="container">
+    <div class="typewriter-card"><div class="card-label">MANUAL CODING</div></div>
+    <div class="vs-badge">VS</div>
+    <div class="robot-card"><div class="robot-face"><div class="robot-eye left"></div><div class="robot-eye right"></div><div class="robot-mouth"></div></div><div class="card-label">AI AGENT</div></div>
+  </div>
+</body>
+</html>
