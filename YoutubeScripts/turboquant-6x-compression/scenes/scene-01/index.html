@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, height=1920">
+<title>Scene 01 - AI IS TOO FAT</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1920px; overflow: hidden;
+    background: #f5f0e8;
+    font-family: 'Quicksand', sans-serif;
+    position: relative;
+  }
+  /* Paper texture overlay */
+  body::before {
+    content: ''; position: absolute; inset: 0; z-index: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 38px, rgba(180,170,155,0.13) 38px, rgba(180,170,155,0.13) 40px),
+                repeating-linear-gradient(90deg, transparent, transparent 38px, rgba(180,170,155,0.10) 38px, rgba(180,170,155,0.10) 40px);
+    pointer-events: none;
+  }
+  body::after {
+    content: ''; position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse at 30% 20%, rgba(255,232,214,0.25) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 80%, rgba(225,245,224,0.2) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .container {
+    position: relative; z-index: 1; width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 80px 60px;
+  }
+  /* Top label */
+  .top-label {
+    position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
+    background: #fce4ec; border: 5px solid #3b3b3b; border-radius: 24px;
+    padding: 18px 54px; font-size: 38px; font-weight: 700; color: #3b3b3b;
+    letter-spacing: 3px;
+    animation: popIn 0.5s ease-out both;
+  }
+  /* Main title */
+  .title {
+    font-size: 112px; font-weight: 700; color: #3b3b3b; text-align: center;
+    line-height: 1.15; margin-bottom: 60px;
+    animation: bounceIn 0.6s 0.3s ease-out both;
+  }
+  .title .fat { color: #d32f2f; font-size: 130px; display: block; }
+  /* Scale group */
+  .scale-group {
+    position: relative; width: 700px; height: 750px;
+    animation: popIn 0.7s 0.5s ease-out both;
+  }
+  /* Scale base */
+  .scale-base {
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 420px; height: 36px; background: #3b3b3b; border-radius: 18px;
+  }
+  .scale-pillar {
+    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+    width: 28px; height: 180px; background: #3b3b3b; border-radius: 10px;
+  }
+  /* Scale plate - tilted to show breaking */
+  .scale-plate {
+    position: absolute; bottom: 200px; left: 50%; 
+    width: 500px; height: 22px; background: #3b3b3b; border-radius: 11px;
+    transform: translateX(-50%) rotate(18deg);
+    transform-origin: center center;
+    animation: tiltPlate 1s 1s ease-in-out both;
+  }
+  /* Brain on scale */
+  .brain-icon {
+    position: absolute; bottom: 260px; left: 50%;
+    transform: translateX(-30%);
+    font-size: 220px; line-height: 1;
+    animation: heavyBounce 0.8s 1.2s ease-in-out both;
+    filter: drop-shadow(4px 8px 0 rgba(0,0,0,0.1));
+  }
+  /* Crack lines */
+  .crack {
+    position: absolute; bottom: 160px; left: 50%; transform: translateX(-50%);
+    width: 200px; height: 120px;
+  }
+  .crack svg { width: 100%; height: 100%; }
+  .crack path {
+    stroke: #d32f2f; stroke-width: 6; fill: none; stroke-linecap: round;
+    stroke-dasharray: 200; stroke-dashoffset: 200;
+    animation: drawCrack 0.5s 1.5s ease-out forwards;
+  }
+  /* Red X */
+  .red-x {
+    position: absolute; top: 350px; right: 100px;
+    font-size: 240px; color: #d32f2f; font-weight: 700; line-height: 1;
+    opacity: 0; animation: slamIn 0.3s 1.8s ease-out forwards;
+    text-shadow: 6px 6px 0 rgba(211,47,47,0.2);
+  }
+  /* Sweat drops */
+  .sweat {
+    position: absolute; font-size: 50px;
+    animation: floatUp 1.5s 1.4s ease-out both infinite;
+  }
+  .sweat:nth-child(1) { top: 280px; left: 200px; animation-delay: 1.4s; }
+  .sweat:nth-child(2) { top: 240px; left: 320px; animation-delay: 1.7s; }
+  .sweat:nth-child(3) { top: 310px; right: 220px; animation-delay: 2s; }
+  /* Corner doodles */
+  .corner-doodle {
+    position: absolute; font-size: 60px; opacity: 0.25;
+  }
+  .corner-doodle.tl { top: 40px; left: 40px; }
+  .corner-doodle.tr { top: 40px; right: 40px; }
+  .corner-doodle.bl { bottom: 40px; left: 40px; }
+  .corner-doodle.br { bottom: 40px; right: 40px; }
+  /* Bottom warning bar */
+  .warning-bar {
+    position: absolute; bottom: 120px; left: 50%; transform: translateX(-50%);
+    background: #d32f2f; border: 5px solid #3b3b3b; border-radius: 20px;
+    padding: 22px 60px; color: #fff; font-size: 42px; font-weight: 700;
+    letter-spacing: 4px;
+    animation: popIn 0.5s 2.1s ease-out both;
+  }
+  /* Animations */
+  @keyframes popIn { 0% { opacity: 0; transform: translateX(-50%) scale(0.3); } 70% { transform: translateX(-50%) scale(1.08); } 100% { opacity: 1; transform: translateX(-50%) scale(1); } }
+  @keyframes bounceIn { 0% { opacity: 0; transform: translateY(-80px) scale(0.5); } 60% { transform: translateY(15px) scale(1.05); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+  @keyframes tiltPlate { 0% { transform: translateX(-50%) rotate(0deg); } 60% { transform: translateX(-50%) rotate(22deg); } 100% { transform: translateX(-50%) rotate(18deg); } }
+  @keyframes heavyBounce { 0% { transform: translateX(-30%) translateY(-200px); opacity: 0; } 50% { transform: translateX(-30%) translateY(20px); opacity: 1; } 70% { transform: translateX(-30%) translateY(-10px); } 100% { transform: translateX(-30%) translateY(0); opacity: 1; } }
+  @keyframes drawCrack { to { stroke-dashoffset: 0; } }
+  @keyframes slamIn { 0% { opacity: 0; transform: scale(3) rotate(-20deg); } 100% { opacity: 1; transform: scale(1) rotate(-12deg); } }
+  @keyframes floatUp { 0% { opacity: 0; transform: translateY(0); } 30% { opacity: 0.7; } 100% { opacity: 0; transform: translateY(-80px); } }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="top-label">SCENE 01</div>
+  <div class="title">AI IS<span class="fat">TOO FAT</span></div>
+  <div class="scale-group">
+    <div class="brain-icon">🧠</div>
+    <span class="sweat">💦</span>
+    <span class="sweat">💦</span>
+    <span class="sweat">💦</span>
+    <div class="scale-plate"></div>
+    <div class="scale-pillar"></div>
+    <div class="scale-base"></div>
+    <div class="crack">
+      <svg viewBox="0 0 200 120">
+        <path d="M30,10 L60,50 L40,55 L80,100 L55,95 L100,120"/>
+        <path d="M130,5 L110,45 L135,50 L100,90 L125,88 L90,120"/>
+      </svg>
+    </div>
+  </div>
+  <div class="red-x">✕</div>
+  <div class="warning-bar">⚠️ OVERLOADED ⚠️</div>
+</div>
+</body>
+</html>
