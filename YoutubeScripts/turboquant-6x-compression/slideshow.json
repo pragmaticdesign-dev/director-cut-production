@@ -1,0 +1,19 @@
+{
+    "title": "Google TurboQuant: 6x AI Compression",
+    "ratio": "shorts",
+    "format": "mp4",
+    "slides": [
+        {"image": "images/scene-01.png", "audio": "audios/01.mp3"},
+        {"image": "images/scene-02.png", "audio": "audios/02.mp3"},
+        {"image": "images/scene-03.png", "audio": "audios/03.mp3"},
+        {"image": "images/scene-04.png", "audio": "audios/04.mp3"},
+        {"image": "images/scene-05.png", "audio": "audios/05.mp3"},
+        {"image": "images/scene-06.png", "audio": "audios/06.mp3"},
+        {"image": "images/scene-07.png", "audio": "audios/07.mp3"},
+        {"image": "images/scene-08.png", "audio": "audios/08.mp3"},
+        {"image": "images/scene-09.png", "audio": "audios/09.mp3"},
+        {"image": "images/scene-10.png", "audio": "audios/10.mp3"},
+        {"image": "images/scene-11.png", "audio": "audios/11.mp3"},
+        {"image": "images/scene-12.png", "audio": "audios/12.mp3"}
+    ]
+}
